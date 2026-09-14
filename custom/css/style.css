@@ -1,0 +1,366 @@
+﻿.imagem-container{
+    width: 250px;
+    height: 205px;
+}
+
+.imagem-container img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ESTILOS DO CABECALHO */
+/* CabeÃ§alho compartilhado: estados topo (claro) e rolado (escuro). */
+:root { --vermelho-home: #DC2626; }
+
+#topo {
+    --header-color: #fff;
+    --header-toggler-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255,255,255,.95%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 1030;
+    color: var(--header-color);
+    /* A propriedade Ã© herdada pelo botÃ£o do index, que nÃ£o estÃ¡ dentro de .navbar. */
+    --bs-navbar-toggler-icon-bg: var(--header-toggler-icon);
+    background-color: transparent;
+    transition: background-color .3s ease, box-shadow .3s ease, color .3s ease;
+}
+
+#topo.fixed-scroll {
+    --header-color: #111;
+    --header-toggler-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2817,17,17,.95%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    background-color: #fff;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, .12);
+}
+
+/* Sobrescreve os fundos fixos presentes nas folhas antigas das pÃ¡ginas internas. */
+body #topo {
+    background-color: transparent !important;
+}
+
+body #topo.fixed-scroll {
+    background-color: #fff !important;
+}
+
+/* NÃ£o deixa .bg-body-tertiary do Bootstrap pintar a barra principal. */
+#topo .navbar {
+    --bs-navbar-toggler-icon-bg: var(--header-toggler-icon);
+    background-color: transparent !important;
+}
+
+#topo .linkmenu,
+#topo #pesquisar,
+#topo #pesquisar i,
+#topo #pesquisar button,
+#topo #perfil a,
+#topo #perfil button,
+#topo .navbar-toggler {
+    color: var(--header-color) !important;
+    transition: color .3s ease, filter .3s ease;
+}
+
+/* O arquivo de logo Ã© escuro; o filtro o torna branco apenas no topo. */
+#topo #logo > a > img,
+#topo .hamburger_menu #img-logo > a > img {
+    filter: brightness(0) invert(1);
+    transition: filter .3s ease;
+}
+
+#topo.fixed-scroll #logo > a > img,
+#topo.fixed-scroll .hamburger_menu #img-logo > a > img {
+    filter: none;
+}
+
+#topo .navbar-toggler {
+    border-color: transparent;
+}
+
+#topo .navbar-toggler:focus {
+    box-shadow: 0 0 0 .2rem rgba(255, 255, 255, .35);
+}
+
+#topo.fixed-scroll .navbar-toggler:focus {
+    box-shadow: 0 0 0 .2rem rgba(0, 0, 0, .18);
+}
+
+/* O mesmo botÃ£o mostra X sempre que o painel mÃ³vel estiver aberto. */
+#topo .navbar-toggler.is-open .navbar-toggler-icon {
+    position: relative;
+    background-image: none;
+}
+
+#topo .navbar-toggler.is-open .navbar-toggler-icon::after {
+    content: 'X';
+    position: absolute;
+    inset: -8px 0 0;
+    color: #111;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* O X de fechar o menu precisa permanecer legÃ­vel sobre o painel. */
+#topo .navbar-toggler.is-open {
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.offcanvas .btn-close {
+    --bs-btn-close-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='%23000' d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293A1 1 0 0 1 .293 14.293L6.586 8 .293 1.707a1 1 0 0 1 0-1.414'/%3e%3c/svg%3e");
+    background: transparent var(--bs-btn-close-bg) center / 1em auto no-repeat !important;
+    filter: none !important;
+    opacity: 1 !important;
+}
+
+/* PainÃ©is offcanvas mantÃªm o contraste prÃ³prio, independente do header. */
+#topo .offcanvas,
+#topo .offcanvas #pesquisar,
+#topo .offcanvas #pesquisar i,
+#topo .offcanvas #pesquisar button,
+#topo .offcanvas #perfil a,
+#topo .offcanvas #perfil button {
+    color: #111 !important;
+}
+
+#topo .offcanvas .navbar {
+    --bs-navbar-toggler-icon-bg: initial;
+    background-color: var(--bs-tertiary-bg) !important;
+}
+
+@media (max-width: 767.98px) {
+    #topo > .container > nav {
+        min-height: 64px;
+        display: flex;
+        flex-wrap: nowrap;
+        gap: .25rem;
+    }
+
+    #topo #pesquisar {
+        margin-left: auto;
+        flex: 0 0 auto;
+        gap: 0;
+    }
+
+    /* Nas pÃ¡ginas antigas, evita a cÃ³pia decorativa dos Ã­cones dentro do menu. */
+    #topo .hamburger_menu .navbar-brand #pesquisar {
+        display: none;
+    }
+
+    /* Nas pÃ¡ginas internas, a .navbar.fixed-top interna nÃ£o pode cobrir a barra inteira. */
+    #topo .hamburger_menu {
+        display: flex;
+        flex: 0 0 auto;
+        align-items: center;
+        order: 0;
+    }
+
+    #topo .hamburger_menu .navbar {
+        position: static !important;
+        inset: auto !important;
+        display: flex;
+        width: auto;
+        flex: 0 0 auto;
+    }
+
+    #topo .hamburger_menu .container-fluid {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: .25rem;
+        padding-inline: 0;
+    }
+
+    #topo .hamburger_menu .navbar-brand {
+        display: none;
+    }
+
+    #topo .hamburger_menu #img-logo,
+    #topo .hamburger_menu .navbar-toggler {
+        flex: 0 0 auto;
+    }
+
+    #topo > .container > nav > #pesquisar {
+        display: flex;
+        order: 3;
+        margin-left: auto;
+        min-width: 0;
+    }
+
+    #topo > .container > nav > #navegacao,
+    #topo > .container > nav > #logo {
+        display: none;
+    }
+
+    #topo #pesquisar .btn,
+    #topo #perfil a,
+    #topo #perfil button,
+    #topo .navbar-toggler {
+        min-width: 44px;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media (min-width: 768px) {
+    #topo #navegacao {
+        background: transparent;
+    }
+
+    #topo .hamburger_menu .navbar.fixed-top {
+        display: none !important;
+    }
+}
+
+/* Componente pÃºblico Ãºnico (#site-header). */
+.site-header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 1030;
+    min-height: 72px;
+    background: #fff;
+    color: #111;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, .08);
+    transition: background-color .25s ease, color .25s ease, box-shadow .25s ease;
+}
+
+.site-header--home { background: transparent; color: #fff; box-shadow: none; }
+.site-header--home.is-scrolled { background: #fff; color: #111; box-shadow: 0 2px 12px rgba(0, 0, 0, .12); }
+.site-header__container { min-height: 72px; flex-direction: row; }
+.site-header__brand { display: flex; align-items: center; gap: .38rem; width: 196px; height: 58px; margin: 0; }
+.site-header__brand .rua52-symbol { width: 42px; height: 42px; object-fit: contain; }
+.site-header__brand .rua52-wordmark { width: 140px; height: 30px; object-fit: contain; }
+.site-header--home .site-header__brand { color: #111; }
+.site-header__links { gap: .25rem; }
+.site-header__links .nav-link { color: inherit; font-size: .92rem; font-weight: 600; padding: .55rem .7rem; }
+.site-header__links .nav-link:hover, .site-header__links .nav-link.active { color: var(--vermelho-home); }
+.site-header__actions { display: flex; align-items: center; gap: .1rem; margin-left: auto; }
+.site-header__icon-button, .site-header__toggler { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; padding: 0; border: 0; color: inherit; background: transparent; }
+.site-header__icon-button:hover { color: var(--vermelho-home); }
+.site-header__cart { position: relative; }
+.site-header__cart-count { position: absolute; top: 1px; right: 0; display: grid; place-items: center; min-width: 17px; height: 17px; padding: 0 4px; border-radius: 999px; background: var(--vermelho-home); color: #fff; font-size: .65rem; font-weight: 700; }
+.site-header__toggler .fa-xmark { display: none; font-size: 1.4rem; }
+.site-header__toggler.is-open .fa-bars { display: none; }
+.site-header__toggler.is-open .fa-xmark { display: block; }
+.site-menu { --bs-offcanvas-width: min(86vw, 340px); z-index: 1055; }
+.site-menu .nav-link { color: #111; font-size: 1.1rem; font-weight: 600; padding: .75rem 0; }
+.site-search { height: auto; min-height: 180px; z-index: 1055; }
+.site-search__form { max-width: 720px; }
+.site-search__form .form-control { min-width: 0; }
+.site-cart { z-index: 1055; }
+.site-cart__image { width: 76px; height: 76px; object-fit: cover; border-radius: .4rem; }
+
+/* PreÃ§os nos cards: promoÃ§Ã£o evidencia a economia sem alterar cards normais. */
+.produto-preco { display: flex; align-items: center; flex-wrap: wrap; gap: .35rem; min-height: 26px; margin-top: .45rem; }
+.produto-preco__normal { color: #111; font-size: 1rem; font-weight: 700; }
+.produto-preco__original { color: #777; font-size: .82rem; text-decoration: line-through; }
+.produto-preco__promocional { color: var(--vermelho-home); font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 800; }
+.servico-lancamento { position: relative; }
+.produto-preco__desconto { position: absolute; top: .65rem; left: .65rem; z-index: 2; padding: .3rem .5rem; border-radius: .45rem; background: var(--vermelho-home); color: #fff; box-shadow: 0 3px 8px rgba(127, 29, 29, .24); font-size: .72rem; font-weight: 800; line-height: 1.2; }
+.produto-preco-detalhe .produto-preco__desconto { position: static; }
+
+@media (max-width: 767.98px) {
+    .servico-lancamento {
+        display: block;
+        position: relative;
+    }
+
+    .servico-lancamento .produto-preco__desconto {
+        top: .65rem;
+        right: auto;
+        bottom: auto;
+        left: .65rem;
+        transform: none;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .site-header { min-height: 58px; }
+    .site-header .navbar { padding-block: .25rem; }
+    .site-header__container { position: relative; min-height: 58px; padding-inline: .55rem; }
+    .site-header__brand { width: 118px; height: 42px; gap: .18rem; flex: 0 0 auto; }
+    .site-header__brand .rua52-symbol { width: 29px; height: 29px; }
+    .site-header__brand .rua52-wordmark { width: 82px; height: 19px; }
+    .site-header__toggler { position: absolute; left: 50%; transform: translateX(-50%); order: 1; width: 34px; height: 38px; }
+    .site-header__actions { order: 3; gap: 0; }
+    .site-header__icon-button { width: 34px; height: 38px; }
+    .site-header__actions a { display: inline-flex; }
+    .site-search__form { width: 100%; }
+
+    #form-ordenar { width: 100%; min-width: 0; }
+    #form-ordenar .form-select { width: 100%; max-width: none; min-height: 44px; }
+
+    /* Filtro e ordenaÃ§Ã£o ocupam o mesmo espaÃ§o no mobile. */
+    #btns { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; width: 100%; }
+    #btns > * { width: 100% !important; min-width: 0; min-height: 44px; }
+    #btns + #form-ordenar, #form-ordenar { width: 100%; }
+    #volt-btn { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; width: 100%; }
+    #volt-btn #voltar { grid-column: 1 / -1; }
+    #btn-off { display: contents; }
+    #btn-off > button, #btn-off > .form-select, #form-ordenar .form-select { width: 100% !important; min-width: 0; min-height: 44px; }
+    #btn-off > .offcanvas { width: min(86vw, 360px) !important; min-height: auto; }
+}
+
+/* ESTILOS DO RODAPE */
+/* RodapÃ© compartilhado â€” mesmo layout e contraste da pÃ¡gina inicial. */
+#rodape {
+    padding-top: 50px;
+    text-align: center;
+    background: rgb(32, 32, 32);
+}
+
+#rodape h3 { color: #fff; margin-top: 15px; }
+#rodape p, #todos-diretos p, #forma-contato, #links-rapidos a.linkmenu { color: #ccc; }
+#rede-rodape a { display: inline-flex; align-items: center; justify-content: center; width: 82px; height: 82px; border-radius: 14px; background: #f4f1ea; }
+#rede-rodape a img { display: block; width: 72px; height: 72px; object-fit: contain; }
+#links-rapidos a { font-size: 16px; color: #8a8a8a; }
+#Contato-rodape { color: #8a8a8a; display: flex; flex-direction: column; margin: 30px 0; }
+#duvida-rodape { margin-top: 30px; }
+#todos-diretos { width: 100%; background: rgb(44, 44, 44); margin-top: 30px; }
+#redes { height: 35px; font-size: 30px; }
+#redes i { width: 20px; height: 20px; color: #ccc; }
+#rodape-email { background: #333; border-radius: 10px; padding: 15px; margin: 20px 0; }
+#rodape-email p { color: #fff; font-size: 14px; margin-bottom: 10px; }
+#form input { width: 100%; height: 40px; border: 1px solid #555; border-radius: 10px; padding: 0 10px; margin-bottom: 10px; background: #000; color: #fff; }
+#btn-email { display: flex; align-items: center; justify-content: center; width: 100%; height: 36px; border-radius: 5px; background: #fff; color: #000; }
+
+@media (max-width: 767.98px) {
+    #rede-rodape { display: flex; flex-direction: column; align-items: center; }
+    #rede-rodape a { margin: 0 auto .5rem; }
+    #redes { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 10px; }
+    #rodape-email { width: 100%; max-width: 380px; margin: 40px auto 20px; }
+}
+
+@media (min-width: 992px) {
+    #rodape { padding: 0; }
+    #rodape .container { display: grid !important; grid-template-columns: 1.35fr .8fr 1.25fr 1.35fr; grid-template-areas: "email email email email" "missao links duvidas contato"; align-items: start; row-gap: 24px; column-gap: 30px; }
+    #rodape .container h3 { margin-top: 15px; margin-bottom: 20px; text-align: center; }
+    #rodape-email { grid-area: email; position: static !important; display: flex; flex-direction: row; align-items: center; width: min(760px, 100%); height: 70px; margin: 20px auto 0 !important; border: 1px solid #ccc; }
+    #rodape-email p { flex: 1; margin: 0; }
+    #form { margin: 0; }
+    #form input { width: 200px; margin: 0; }
+    #btn-email { width: 90px; height: 30px; margin: 4px 0 0 8px; }
+    #rede-rodape, #links-rapidos, #Contato-rodape, #duvida-rodape { flex-shrink: 0; text-align: center; }
+    #rede-rodape { grid-area: missao; display: flex; flex-direction: column; align-items: center; width: auto; }
+    #rede-rodape a { width: 72px; height: 72px; margin: -80px 0 0; }
+    #rede-rodape a img { width: 62px; height: 62px; }
+    #rede-rodape h3 { margin: 14px 0 8px !important; }
+    #rede-rodape p { margin: 0; }
+    #rede-rodape #redes { justify-content: center; }
+    #links-rapidos { grid-area: links; }
+    #duvida-rodape { grid-area: duvidas; margin-top: 0; }
+    #Contato-rodape { grid-area: contato; align-content: center; justify-content: center; margin: 0; }
+    #redes { display: flex; gap: 20px; margin-top: 10px; }
+    #redes i { width: 30px; height: 35px; font-size: 25px; }
+}
+
+/* Em telas de notebook, a logo deve ficar abaixo do cadastro de e-mail. */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    #rodape-email { width: min(640px, 100%); justify-self: end; transform: translateX(100px); }
+}
+
+@media (min-width: 1200px) {
+    #rodape-email { grid-column: 2 / 5; width: 100%; max-width: 860px; transform: translateX(-80px); }
+    #rodape-email p { margin-top: 8px; white-space: nowrap; }
+}

@@ -1,0 +1,1676 @@
+:root {
+    --vermelho-home: #DC2626;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #F5F5F5;
+}
+
+p {
+    font-family: 'Poppins', sans-serif;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+h2 {
+    text-transform: uppercase;
+}
+
+h2::after {
+    content: "";
+    width: 230px;
+    height: 5px;
+    background: #111;
+    display: block;
+    margin-top: 1px;
+    margin-bottom: 15px;
+}
+
+/* ========================================
+   ANIMAÇÃO DE SCROLL
+======================================== */
+.secao {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 0.6s ease;
+}
+
+.secao.aparecer {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========================================
+   LAYOUT GERAL
+======================================== */
+.container {
+    width: 98%;
+    max-width: 1200px;
+    height: auto;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ========================================
+   HEADER / NAVBAR
+   Estrutura: 1 logo mobile (.hamburger_menu #img-logo) OU
+   1 logo desktop (#logo) — nunca os dois ao mesmo tempo.
+   1 lista de navegação (#navegacao), usada tanto como painel
+   mobile quanto como barra horizontal no desktop.
+   1 bloco de busca/perfil/carrinho (#pesquisar), sempre visível.
+======================================== */
+/* MODIFICADO: header volta a ficar TRANSPARENTE por padrão (topo da
+   página), sobrepondo o banner sem cobri-lo com fundo sólido — assim o
+   banner aparece inteiro por trás do menu. Texto/ícones em branco para
+   ter contraste sobre a imagem do carrossel. Só ao rolar a página
+   (classe .fixed-scroll, adicionada via JS) o header ganha um fundo
+   sólido e bem visível, pra não "sumir" em cima do conteúdo abaixo. */
+#topo {
+    width: 100%;
+    z-index: 10;
+    position: fixed;
+    background: transparent;
+    transition: background 0.3s ease;
+}
+
+/* CORREÇÃO: o <nav> dentro de #topo .container envolve 4 blocos
+   (.hamburger_menu, #logo, #navegacao, #pesquisar) que precisam ficar
+   lado a lado. Sem isso, o <nav> assume o comportamento padrão (bloco),
+   empilhando tudo verticalmente e fazendo o cabeçalho "explodir" em
+   altura, sobrepondo o conteúdo da página (já que #topo é fixed). */
+#topo nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+.navbar {
+    padding: 0;
+}
+ 
+.navbar-brand {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+/* --- Bloco mobile: logo pequeno + botão hamburguer --- */
+.hamburger_menu {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#img-logo img {
+    width: 70px;
+    height: auto;
+}
+
+.navbar-toggler {
+    border: none;
+    background: none;
+    padding: 8px;
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+/* --- Logo desktop: escondido no mobile por padrão (evita duplicar com o
+   logo mobile de .hamburger_menu #img-logo), só volta a partir de 768px --- */
+#logo {
+    display: none;
+}
+
+#logo img {
+    width: 85px;
+}
+ 
+#logo a {
+    display: flex;
+    text-align: initial;
+}
+ 
+#pesquisar {
+    color: #fff;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+ 
+#pesquisar i {
+    margin-right: 3px;
+    color: #000;
+}
+
+/* --- Navegação: painel mobile por padrão --- */
+#navegacao {
+    background: #0f172A;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    transform: translateX(100%);
+    pointer-events: none;
+    transition: transform 0.4s ease;
+    z-index: 999;
+}
+
+#navegacao.open {
+    transform: translateX(0);
+    pointer-events: all;
+}
+
+.linkmenu {
+    color: #fff;
+    font-size: 20px;
+    text-transform: uppercase;
+    padding: 10px;
+    display: inline-block;
+}
+
+.linkmenu.active,
+.linkmenu:hover {
+    color: #DC2626;
+}
+
+/* --- Busca / Perfil / Carrinho: instância única, sempre visível --- */
+#pesquisar {
+    color: #111;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+}
+
+#pesquisar button,
+#perfil a,
+#perfil button {
+    padding: 10px;
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: inherit;
+    position: relative;
+}
+
+#perfil {
+    display: flex;
+    align-items: center;
+}
+
+.contador-carrinho {
+    font-size: 11px;
+    font-weight: 700;
+    background: #DC2626;
+    color: #fff;
+    border-radius: 50%;
+    min-width: 16px;
+    height: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    padding: 0 3px;
+}
+
+.offcanvas-header .contador-carrinho {
+    position: static;
+    border-radius: 4px;
+    padding: 2px 6px;
+}
+
+#pesquisar-fluid {
+    justify-content: center;
+    gap: 5px;
+}
+
+.form-control {
+    width: 100%;
+    max-width: 550px;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.form-control:focus {
+    border-bottom: 2px solid #000;
+    box-shadow: none;
+}
+
+/* Navbar ao rolar a página (classe adicionada via JS): fundo transparente
+   com texto branco — invertido do estado inicial (topo da página), que
+   agora é branco sólido com texto escuro. O link ativo continua vermelho
+   sempre (regra global .linkmenu.active, não sobrescrita aqui). */
+.fixed-scroll {
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: none;
+}
+
+.fixed-scroll #pesquisar {
+    color: #fff;
+}
+
+.fixed-scroll .linkmenu:hover {
+    color: #DC2626;
+}
+
+/* ========================================
+   BANNER / CARROSSEL
+======================================== */
+#banner1 img {
+    object-position: 30%;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    object-position: center;
+}
+
+#banner2 p,
+#banner2 h3 {
+    color: #8a8a8a;
+}
+
+#banner2 h3 {
+    font-size: 24px;
+}
+
+.btn-primary {
+    background: #333;
+    border: none;
+}
+
+/* ========================================
+   OFERTAS
+======================================== */
+#ofertas {
+    display: flex;
+    text-align: center;
+    margin-top: 100px;
+    background: #F3F3F3;
+}
+
+#ofertas > .container h2 {
+    font-size: 27px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+}
+
+#produto_oferta {
+    text-align: start;
+    margin-bottom: 10px;
+}
+
+#produto_oferta img {
+    width: 100%;
+    height: 270px;
+    margin: 5px 0 5px 3px;
+}
+
+.servico-ofertas {
+    position: relative;
+    display: block;
+}
+
+.servico-ofertas p {
+    color: #111111;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.servico-ofertas:hover {
+    border: 2px solid #000;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    transform: translateY(-5px);
+}
+
+/* ========================================
+   PREÇOS (original riscado + promocional em destaque)
+======================================== */
+/* MODIFICADO: removido "position: relative" daqui. Como o badge de
+   desconto (.badge-desconto) é filho deste elemento, ele estava se
+   posicionando em cima do preço (que fica logo abaixo) em vez de no
+   canto da imagem do produto. Sem o position:relative aqui, o badge
+   volta a se posicionar relativo ao card inteiro (.servico-ofertas /
+   .servico-populares, que já tem position:relative), aparecendo
+   corretamente sobre a imagem. */
+.preco-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 4px 0 4px 5px;
+}
+
+.preco-original {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 13px;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+}
+
+.preco-promocional {
+    color: var(--vermelho-home);
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 2px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.preco-atual {
+    color: #111;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+}
+
+.badge-desconto {
+    background: var(--vermelho-home);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 2;
+}
+
+/* ========================================
+   PROPAGANDA
+======================================== */
+#propaganda img {
+    margin-top: 60px;
+}
+
+/* ========================================
+   TEMPORADA
+======================================== */
+#temporada {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    margin-top: 50px;
+    background: #0f172A;
+}
+
+#temporada > .container {
+    min-height: 600px;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+/* MODIFICADO: align-items:center só centralizava a linha decorativa
+   (::after), não o texto "Nova Temporada" em si, que ficava alinhado à
+   esquerda dentro do h2. Adicionado text-align:center para centralizar
+   o texto também. */
+#temporada h2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-size: 35px;
+    color: #fff;
+}
+
+#temporada h2::after {
+    background: #fff;
+}
+
+/* MODIFICADO: gradiente escuro adicionado ao fundo para garantir contraste
+   do texto branco sobre a imagem (antes o background-blend-mode: overlay
+   não fazia efeito nenhum sem uma cor de fundo definida) */
+#imagem_temp {
+    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55)),
+                url(../../assets/img/home/temporada.jpg) center;
+    background-size: cover;
+    width: 100%;
+    height: 350px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#imagem_temp h2 {
+    color: #fff;
+    margin-bottom: 100px;
+    margin-top: 20px;
+    font-size: 35px;
+}
+
+#imagem_temp h2::after {
+    background: none;
+}
+
+#imagem_temp a {
+    text-transform: uppercase;
+    background: #b21f2d;
+    padding: 10px 20px;
+    border-radius: 40px;
+    color: #fff;
+}
+
+#imagem_temp a:hover {
+    background: #8f1722;
+    border: 2px solid #f3d2d5;
+}
+
+/* ========================================
+   MARCAS
+======================================== */
+#marca {
+    display: flex;
+    text-align: center;
+    margin-top: 100px;
+    background: #F3F3F3;
+}
+
+#marca > .container h2 {
+    font-size: 27px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* MODIFICADO: card agora com posição relativa + overflow escondido para
+   conter as duas imagens (base e hover) empilhadas */
+.card_marca {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    height: 280px;
+}
+
+/* Gradiente escuro atrás do nome da marca, garante legibilidade
+   independente de a foto ser clara naquele canto */
+.card_marca::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 45%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* NOVO: as duas imagens de cada card ficam sobrepostas via position absolute,
+   a .img-hover começa invisível e troca de opacidade no :hover do card */
+.card_marca .img-base,
+.card_marca .img-hover {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.card_marca .img-hover {
+    opacity: 0;
+}
+
+.card_marca:hover .img-base {
+    opacity: 0;
+}
+
+.card_marca:hover .img-hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.texto-marca {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    right: 20px;
+    color: #fff;
+    text-align: left;
+    z-index: 2;
+}
+
+/* ========================================
+   POPULARES
+======================================== */
+#populares {
+    display: flex;
+    text-align: center;
+    margin-top: 100px;
+    background: #F3F3F3;
+}
+
+#populares > .container h2 {
+    font-size: 27px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#produto_populares {
+    text-align: start;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#produto_populares img {
+    width: 100%;
+    height: 280px;
+    margin: 5px 0 5px 3px;
+}
+
+.servico-populares {
+    margin-right: 8px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    transition: 0.3s;
+    position: relative;
+    display: block;
+}
+
+.servico-populares p {
+    color: #111111;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.servico-populares:hover {
+    border: 2px solid #000;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    transform: translateY(-5px);
+}
+
+/* ========================================
+   PROPAGANDA 2
+======================================== */
+#propaganda2 {
+    margin-top: 80px;
+}
+
+/* MODIFICADO: no mobile o .container fica em coluna (flex-direction: column
+   herdado de .container) e não havia nenhum espaçamento entre os blocos de
+   imagem, por isso ficava tudo grudado. Regra restrita a telas até 767px
+   para não afetar o layout de tablet/desktop já existente. */
+@media (max-width: 767.98px) {
+    #propaganda2 > .container {
+        gap: 10px;
+    }
+
+    #img-propaganda2 img {
+        height: 260px;
+    }
+
+    #imagem-propagandas2 {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    #imagem-propagandas2 img {
+        width: calc(50% - 4px);
+        height: 160px;
+        margin-bottom: 0 !important;
+    }
+}
+
+/* ========================================
+   SOBRE NÓS
+======================================== */
+#sobre-nos {
+    display: flex;
+    text-align: center;
+    margin-top: 80px;
+    background: radial-gradient(circle at 12% 20%, rgba(178, 31, 45, .18), transparent 34%), linear-gradient(120deg, #07090d, #121827 55%, #090a0d);
+    padding: 55px 0 65px;
+    border-bottom: 2px solid #b21f2d;
+}
+
+#sobre-nos > .container h2 {
+    font-size: 27px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #fff;
+    margin-top: 30px;
+}
+
+#sobre-nos > .container h2::after {
+    content: '';
+    background: #fff;
+}
+
+#sobre-nos > .container p {
+    color: #fff;
+}
+
+.temporada-selo {
+    display: inline-block;
+    margin-bottom: 12px;
+    padding: 6px 12px;
+    border: 1px solid rgba(255, 255, 255, .45);
+    border-radius: 999px;
+    color: #fff;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+}
+
+#sobre-nos > .container > p { display: none; }
+.sobre-texto { margin: 0 auto 28px; }
+.sobre-texto > p:not(.sobre-resumo):not(.sobre-origem) { display: none; }
+.sobre-conteudo { width: min(100% - 32px, 720px); margin: 0 auto; padding: 18px 22px; border-left: 2px solid #b21f2d; background: linear-gradient(90deg, rgba(178, 31, 45, .12), rgba(23, 31, 47, .72) 48%, rgba(23, 31, 47, .24)); }
+.sobre-resumo { margin: 0 auto 18px; color: #e2e2e2 !important; font-size: 1.15rem; line-height: 1.7; }
+.sobre-origem { margin: 0 auto; color: #cfcfcf !important; font-size: .95rem; line-height: 1.6; text-align: center; }
+.sobre-origem strong { color: #fff; }
+.sobre-pilares { display: flex; justify-content: center; gap: 18px; }
+.sobre-pilar { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 31%; min-height: 170px; padding: 20px 18px; border: 1px solid #333; border-radius: 12px; background: rgba(18, 18, 18, .9); text-align: center; }
+.sobre-pilar i { display: grid; place-items: center; width: 52px; height: 52px; border: 1px solid rgba(178, 31, 45, .65); border-radius: 50%; background: rgba(178, 31, 45, .12); color: #df3a49; font-size: 1.35rem; }
+.sobre-pilar h3 { width: 100%; margin: 14px 0 8px; color: #fff; font-size: 1.1rem; text-align: center; }
+#sobre-nos .sobre-pilar p { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 3em; margin: 0; color: #d2d2d2 !important; font-size: .92rem; line-height: 1.5; text-align: center !important; text-indent: 0 !important; }
+
+@media (max-width: 767.98px) {
+    .sobre-conteudo { width: min(100% - 24px, 720px); padding: 16px; }
+    .sobre-pilares { flex-direction: column; align-items: center; }
+    .sobre-pilar { width: min(100%, 340px); min-height: auto; }
+    .sobre-resumo { max-width: 340px; }
+    .sobre-origem { max-width: 340px; }
+}
+
+/* ========================================
+   RODAPÉ
+======================================== */
+#rodape {
+    padding-top: 50px;
+    text-align: center;
+    background: rgb(32, 32, 32);
+}
+
+#rodape h3 {
+    color: white;
+    margin-top: 15px;
+}
+
+#rodape p {
+    color: #ccc;
+}
+
+#rede-rodape a {
+    font-size: 30px;
+}
+
+/* MODIFICADO: os ícones não tinham display flex nem gap, então ficavam
+   desalinhados/grudados no mobile. Agora ficam centralizados com
+   espaçamento uniforme entre eles. */
+/* MODIFICADO: restrito a telas até 767px. Os ícones não tinham display flex
+   nem gap, ficando desalinhados/grudados só no mobile — em telas maiores
+   o rodapé já ficava certo antes, então não mexemos ali. */
+@media (max-width: 767.98px) {
+    #redes {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        margin-top: 10px;
+    }
+}
+
+#redes {
+    height: 35px;
+    font-size: 30px;
+}
+
+#redes i {
+    width: 20px;
+    height: 20px;
+    color: #ccc;
+}
+
+#Contato-rodape {
+    color: #8a8a8a;
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#links-rapidos a {
+    font-size: 16px;
+    color: #8a8a8a;
+}
+
+#links-rapidos a.linkmenu {
+    color: #ccc;
+}
+
+#forma-contato {
+    color: #ccc;
+}
+
+#duvida-rodape {
+    margin-top: 30px;
+}
+
+#todos-diretos {
+    width: 100%;
+    background: rgb(44, 44, 44);
+    margin-top: 30px;
+    
+}
+
+#todos-diretos p {
+    color: #ccc;
+}
+
+/* MODIFICADO: sem largura/margem definidas, o bloco ficava esticado até a
+   borda da tela e "solto" em relação ao resto do rodapé no mobile.
+   Agora fica centralizado, com uma largura controlada e mais espaço
+   em relação à seção de dúvidas/contato acima dele. */
+/* MODIFICADO: restrito a telas até 767px (mobile). Nessa faixa a caixa
+   ficava esticada até a borda da tela; em telas maiores o rodapé já
+   funcionava bem antes (regra própria definida em 992px), então não
+   mexemos ali. */
+#rodape-email {
+    background: #333;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 20px 0;
+}
+
+@media (max-width: 767.98px) {
+    #rodape-email {
+        width: 100%;
+        max-width: 380px;
+        margin: 40px auto 20px;
+    }
+}
+
+#rodape-email p {
+    color: #fff;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+#form input {
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    background: #000;
+    color: #fff;
+    border: 1px solid #555;
+    padding: 0 10px;
+    margin-bottom: 10px;
+}
+
+#btn-email {
+    background: #fff;
+    color: #000;
+    width: 100%;
+    height: 36px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ========================================
+   MEDIA QUERY — 480px e abaixo (celulares pequenos)
+======================================== */
+@media (max-width: 480px) {
+    .servico-ofertas,
+    .servico-populares {
+        width: 100%;
+    }
+
+    #produto_oferta img,
+    #produto_populares img {
+        height: 220px;
+    }
+
+    /* MODIFICADO: os cards já ocupavam 100% da largura, mas o texto (nome,
+       preço) continuava alinhado à esquerda por causa do text-align:start
+       herdado do container pai, o que dava a impressão de "não
+       centralizado". Agora nome e preço ficam centralizados no card. */
+    #produto_oferta,
+    #produto_populares {
+        text-align: center;
+    }
+
+    .servico-ofertas p,
+    .servico-populares p {
+        margin-left: 0;
+    }
+
+    .preco-wrapper {
+        align-items: center;
+        margin-left: 0;
+    }
+
+    .preco-promocional {
+        font-size: 17px;
+    }
+
+    #img-logo img {
+        width: 56px;
+    }
+
+    .card_marca {
+        height: 220px;
+    }
+}
+
+/* ========================================
+   MEDIA QUERY — 768px (Tablet / troca para menu horizontal)
+======================================== */
+@media (min-width: 768px) {
+
+    .hamburger_menu {
+        display: none;
+    }
+
+    #logo {
+        display: flex;
+    }
+
+    #navegacao {
+        position: static;
+        inset: auto;
+        width: auto;
+        height: auto;
+        background: transparent;
+        flex-direction: row;
+        gap: 20px;
+        transform: none;
+        pointer-events: all;
+        transition: none;
+        z-index: auto;
+    }
+
+    #navegacao li {
+        display: inline-block;
+    }
+
+    /* MODIFICADO: invertido — no topo (não rolado) o cabeçalho agora tem
+       fundo branco sólido, então o texto volta a ser escuro por padrão.
+       Ao rolar (.fixed-scroll, fundo transparente), o texto vira branco. */
+    .linkmenu {
+        color: #333;
+        font-size: 16px;
+        padding: 6px 4px;
+    }
+
+    #pesquisar {
+        color: #333;
+    }
+
+    .fixed-scroll .linkmenu {
+        color: #fff;
+    }
+
+    /* Ofertas */
+    #ofertas > .container h2 {
+        font-size: 32px;
+    }
+
+    #produto_oferta {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    #produto_oferta img {
+        width: 310px;
+        height: auto;
+    }
+
+    .servico-ofertas {
+        align-items: center;
+        width: 48%;
+    }
+
+    /* Propaganda */
+    #propaganda > .container {
+        flex-direction: row;
+        gap: 5px;
+    }
+
+    #propaganda img {
+        width: 350px;
+        height: auto;
+    }
+
+    /* Temporada */
+    #temporada > .container {
+        flex-direction: row-reverse;
+        min-height: 450px;
+        margin-top: 15px;
+        margin-left: 0;
+    }
+
+    #imagem_temp {
+        width: 50%;
+        height: 350px;
+        margin-top: 0;
+    }
+
+    #texto_temp {
+        width: 350px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    #texto_temp p {
+        width: 250px;
+        margin-left: 80px;
+        text-align: start;
+    }
+
+    /* Marcas */
+    #marca > .container h2 {
+        font-size: 32px;
+    }
+
+    #cards_marc {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .card_marca {
+        width: calc(50% - 5px);
+        height: 350px;
+    }
+
+    /* Populares */
+    #populares > .container h2 {
+        font-size: 32px;
+    }
+
+    #produto_populares {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    #produto_populares img {
+        width: 310px;
+        height: auto;
+    }
+
+    .servico-populares {
+        align-items: center;
+        width: 48%;
+    }
+
+    /* Propaganda 2 */
+    #propaganda2 > .container {
+        flex-direction: row;
+        gap: 5px;
+    }
+
+    #img-propaganda2 img {
+        width: 380px;
+        height: 479px;
+    }
+
+    #imagem-propagandas2 {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    #imagem-propagandas2 img {
+        width: 165px;
+        height: auto;
+    }
+
+    /* Sobre nós */
+    #sobre-nos {
+        justify-content: center;
+        padding: 55px 0 65px;
+        min-height: 530px;
+    }
+
+    #sobre-nos > .container h2 {
+        font-size: 32px;
+    }
+
+    #sobre-nos > .container p {
+        text-align: start;
+        text-indent: 3em;
+    }
+
+    /* Rodapé */
+    #rede-rodape img {
+        width: 450px;
+    }
+
+    #todos-diretos {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 10px;
+        height: 50px;
+    }
+
+    #todos-diretos p {
+        margin-top: 10px;
+    }
+
+    #redes {
+        height: 35px;
+        font-size: 30px;
+    }
+
+    #redes i {
+        width: 30px;
+        height: 35px;
+        font-size: 23px;
+    }
+}
+
+/* ========================================
+   MEDIA QUERY — 992px (Desktop)
+======================================== */
+@media (min-width: 992px) {
+
+    .carousel-item img {
+        height: 420px;
+    }
+
+    #banner2 p,
+    #banner2 h3 {
+        color: #111;
+    }
+
+    .btn-banner {
+        width: 150px;
+        font-size: 18px;
+        background: #333;
+        border: none;
+    }
+
+    /* Ofertas */
+    #ofertas > .container h2 {
+        font-size: 42px;
+    }
+
+    /* MODIFICADO: largura fixa (280px x 4 cards) ultrapassava a largura real
+       do container nessa faixa (ex: ~973px em telas de 1024px), fazendo os
+       produtos "vazarem" para fora. Agora os 4 cards dividem o espaço
+       disponível de forma flexível, com gap uniforme entre eles. */
+    #produto_oferta {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 8px;
+    }
+
+    #produto_oferta img {
+        width: 220px !important;
+        height: auto;
+    }
+
+    .servico-ofertas {
+        flex: 1 1 0;
+        min-width: 0;
+        align-items: center;
+        border: 2px solid transparent;
+        border-radius: 10px;
+        transition: 0.3s;
+    }
+
+    /* Propaganda */
+    #propaganda > .container {
+        gap: 10px;
+    }
+
+    #propaganda img {
+        width: 480px;
+        height: auto;
+    }
+
+    /* Temporada */
+    #temporada > .container {
+        justify-content: space-between;
+        margin-left: 11.3px;
+        min-height: 550px;
+    }
+
+    #texto_temp {
+        margin-right: 50px;
+        width: 380px;
+    }
+
+    #texto_temp h2 {
+        font-size: 38px;
+    }
+
+    #texto_temp p {
+        font-size: 22px;
+    }
+
+    #imagem_temp {
+        width: 530px;
+        height: 420px;
+    }
+
+    #imagem_temp h2 {
+        font-size: 45px;
+    }
+
+    #imagem_temp a {
+        font-size: 20px;
+    }
+
+    .btn-temporada {
+        width: 240px !important;
+        height: 50px !important;
+    }
+
+    /* Marcas */
+    #marca > .container h2 {
+        font-size: 42px;
+    }
+
+    #cards_marc {
+        flex-wrap: nowrap;
+    }
+
+    .card_marca {
+        width: 238px;
+        height: 480px;
+    }
+
+    /* Populares */
+    #populares > .container h2 {
+        font-size: 42px;
+    }
+
+    
+    #produto_populares {
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    #produto_populares img {
+        width: 220px !important;
+        height: auto;
+    }
+
+    .servico-populares {
+        width: 220px;
+        align-items: center;
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+
+    /* Propaganda 2 */
+    #img-propaganda2 img {
+        width: 500px;
+        height: 633px;
+    }
+
+    #imagem-propagandas2 img {
+        width: 219px;
+        height: auto;
+    }
+
+    /* Sobre nós */
+    #sobre-nos {
+        min-height: 530px;
+    }
+
+    #sobre-nos > .container p {
+        font-size: 18px;
+    }
+
+    /* Rodapé */
+    #rodape {
+        padding: 0;
+    }
+
+    /* MODIFICADO: adicionado flex-wrap. Antes as 5 seções (incl. a caixa de
+       e-mail) disputavam espaço numa única linha; em telas médias
+       (~1000-1200px) isso espremia o texto do #rodape-email numa coluna
+       minúscula, quebrando letra por letra. Com wrap + flex-basis:100% na
+       caixa de e-mail (ver abaixo), ela sempre cai pra própria linha,
+       com largura total disponível. */
+    #rodape .container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        row-gap: 30px;
+        column-gap: 20px;
+    }
+
+    #rodape .container h3 {
+        margin-bottom: 20px;
+        text-align: start;
+    }
+
+    /* MODIFICADO: em vez de forçar sempre a própria linha (o que deixava
+       aquele espaço vazio no canto superior direito do rodapé), a caixa
+       agora tenta encaixar na mesma fileira das outras colunas (ocupando
+       o espaço vazio ali), com uma largura mínima de 320px pra não ficar
+       espremida. Só cai pra linha de baixo (via flex-wrap no pai) se
+       realmente não houver espaço suficiente na fileira. */
+    #rodape-email {
+        display: flex;
+        flex-direction: row;
+        height: 70px;
+        width: 760px;
+        position: absolute;
+        margin-left: 210px;
+        margin-top: 60px;
+        border: solid #ccc;
+        border-radius: 10px;
+        
+    }
+
+    #rodape-email p {
+        font-size: 14px;
+        margin-top: 0;
+        color: #fff;
+        flex: 1;
+    }
+
+    #form {
+        margin: 0;
+    }
+
+    #form input {
+        
+        width: 200px;
+    }
+
+    #btn-email {
+        width: 90px !important;
+        height: 30px !important;
+        padding-top: 5px;
+        margin-left: 8px;
+        margin-top: 4px;
+    }
+
+    #duvida-rodape p {
+        margin: 0;
+    }
+
+    
+    #rede-rodape {
+        display: flex;
+        flex-direction: column;
+        text-align: start;
+        width: 180px;
+        flex-shrink: 0;
+    }
+
+    #rede-rodape img {
+        width: 150px;
+    }
+
+    #links-rapidos {
+        text-align: start;
+        align-content: end;
+        flex-shrink: 0;
+        
+    }
+     #links-rapidos a
+     {
+        padding: 0px;
+     }
+
+    #Contato-rodape {
+        margin: 0;
+        padding: 0;
+        text-align: start;
+        justify-content: end;
+        margin-bottom: 22px;
+        flex-shrink: 0;
+    }
+
+    #duvida-rodape {
+        margin: 0;
+        text-align: start;
+        align-content: end;
+        flex-shrink: 0;
+    }
+
+    #todos-diretos {
+        height: 50px;
+    }
+
+    #redes {
+        height: 35px;
+        display: flex;
+        gap: 20px;
+        font-size: 30px;
+        margin-top: 10px;
+    }
+
+    #redes i {
+        width: 30px;
+        height: 35px;
+        font-size: 25px;
+    }
+}
+
+/* ========================================
+   MEDIA QUERY — 1200px (Large Desktop)
+======================================== */
+@media (min-width: 1200px) {
+
+    /* Ofertas */
+    #produto_oferta img {
+        width: 278px  !important;
+        height: auto;
+    }
+
+    /* .servico-ofertas já usa flex:1 1 0 definido em 992px, mantendo os
+       4 cards distribuídos igualmente sem necessidade de largura fixa aqui */
+
+    /* Propaganda */
+    #propaganda > .container {
+        gap: 12px;
+    }
+
+    #propaganda img {
+        width: 580px;
+        height: auto;
+    }
+
+    /* Temporada */
+    #temporada {
+        justify-content: center;
+    }
+
+    #temporada > .container {
+        margin: 0;
+        min-height: 650px;
+    }
+
+    #texto_temp {
+        margin: 0;
+        width: 490px;
+        text-align: center;
+    }
+
+    #texto_temp h2 {
+        font-size: 45px;
+    }
+
+    #texto_temp p {
+        font-size: 24px;
+        margin-left: 110px;
+        margin-top: 12px;
+    }
+
+    #imagem_temp {
+        width: 600px;
+        height: 550px;
+        margin: 0;
+    }
+
+    #imagem_temp h2 {
+        font-size: 60px;
+        margin-bottom: 150px;
+    }
+
+    #imagem_temp a {
+        font-size: 25px;
+    }
+
+    .btn-temporada {
+        width: 280px !important;
+        height: 60px !important;
+    }
+
+    /* Marcas */
+    .card_marca {
+        width: 288px;
+    }
+
+    /* Populares */
+    #produto_populares img {
+        width: 258px  !important;
+        height: auto;
+    }
+
+    .servico-populares {
+        width: 265px;
+    }
+
+    /* Propaganda 2 */
+    #img-propaganda2 img {
+        width: 600px;
+        height: 809px;
+    }
+
+    #imagem-propagandas2 img {
+        width: 280px;
+        height: auto;
+    }
+
+    /* Sobre nós */
+    #sobre-nos {
+        min-height: 450px;
+    }
+
+    /* Rodapé */
+    #rede-rodape a {
+        font-size: 35px;
+    }
+
+    #todos-diretos {
+        justify-content: space-around;
+    }
+
+    #todos-diretos p {
+        margin-top: 10px;
+        font-size: 18px;
+    }
+
+    #rodape-email{
+        width: 50%;
+    }
+
+     #rodape-email p{
+        margin-top: 8px;
+     }
+
+    #forma-contato {
+        margin-bottom: 0;
+    }
+
+    #redes {
+        height: 35px;
+        display: flex;
+        gap: 20px;
+        font-size: 30px;
+        margin-top: 10px;
+    }
+
+    #redes i {
+        width: 30px;
+        font-size: 25px;
+    }
+}
+
+/* Destaque legÃ­vel e elegante para o texto e a chamada do banner. */
+#carouselExampleCaptions .carousel-caption {
+    right: auto;
+    bottom: 12%;
+    left: clamp(1.25rem, 8vw, 8rem);
+    width: min(90%, 560px);
+    padding: 0;
+    text-align: left;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, .55);
+}
+
+#carouselExampleCaptions .carousel-caption h2,
+#carouselExampleCaptions .carousel-caption h3,
+#carouselExampleCaptions .carousel-caption h4 {
+    margin-bottom: .65rem;
+    color: #fff;
+    font-size: clamp(1.8rem, 3.4vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.04;
+    letter-spacing: -.035em;
+}
+
+#carouselExampleCaptions .carousel-caption p {
+    max-width: 480px;
+    margin-bottom: 1.25rem;
+    color: #fff;
+    font-size: clamp(.95rem, 1.45vw, 1.15rem);
+    font-weight: 500;
+}
+
+#carouselExampleCaptions .btn-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: .65rem;
+    width: auto;
+    height: auto;
+    padding: .8rem 1.2rem;
+    border: 0;
+    border-radius: 999px;
+    background: var(--vermelho-home);
+    color: #fff;
+    font-size: .9rem;
+    font-weight: 800;
+    letter-spacing: .01em;
+    box-shadow: 0 8px 20px rgba(127, 29, 29, .35);
+    text-shadow: none;
+    transition: transform .2s ease, background-color .2s ease, box-shadow .2s ease;
+}
+
+#carouselExampleCaptions .btn-banner:hover,
+#carouselExampleCaptions .btn-banner:focus {
+    background: #b91c1c;
+    color: #fff;
+    box-shadow: 0 12px 26px rgba(127, 29, 29, .42);
+    transform: translateY(-2px);
+}
+
+/* Controles do carrossel com contraste e Ã¡rea de toque confortÃ¡vel. */
+#carouselExampleCaptions .carousel-control-prev,
+#carouselExampleCaptions .carousel-control-next {
+    width: auto;
+    padding: 0 18px;
+    opacity: 1;
+}
+
+#carouselExampleCaptions .banner-navegacao {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border: 1px solid rgba(255, 255, 255, .72);
+    border-radius: 50%;
+    background: rgba(17, 17, 17, .52);
+    color: #fff;
+    font-size: 1rem;
+    backdrop-filter: blur(4px);
+    transition: transform .2s ease, background-color .2s ease, border-color .2s ease;
+}
+
+#carouselExampleCaptions .carousel-control-prev:hover .banner-navegacao,
+#carouselExampleCaptions .carousel-control-next:hover .banner-navegacao,
+#carouselExampleCaptions .carousel-control-prev:focus-visible .banner-navegacao,
+#carouselExampleCaptions .carousel-control-next:focus-visible .banner-navegacao {
+    border-color: var(--vermelho-home);
+    background: var(--vermelho-home);
+    transform: scale(1.08);
+}
+
+@media (max-width: 575.98px) {
+    #carouselExampleCaptions .carousel-control-prev,
+    #carouselExampleCaptions .carousel-control-next { padding: 0 10px; }
+
+    #carouselExampleCaptions .banner-navegacao {
+        width: 40px;
+        height: 40px;
+        font-size: .88rem;
+    }
+}
+
+/* Populares: cards maiores e distribuÃ­dos sem sobrar espaÃ§o lateral. */
+@media (min-width: 992px) {
+    #produto_populares {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 16px;
+        align-items: start;
+    }
+
+    .servico-populares {
+        width: 100% !important;
+        margin: 0;
+    }
+
+    #produto_populares img {
+        width: 100% !important;
+        height: 300px;
+        object-fit: cover;
+        margin: 0;
+    }
+}

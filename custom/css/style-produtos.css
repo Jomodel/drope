@@ -1,0 +1,1017 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;   
+}
+
+body
+{
+    font-family: 'Roboto', sans-serif;
+   background: #F5F5F5;
+}
+
+p{
+    font-family: 'Poppins', sans-serif;
+}
+
+img
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+h2
+{
+    text-transform: uppercase;
+}
+
+a{
+    text-decoration: none;
+}
+
+.volt-ini{
+    opacity: 60%;
+}
+
+.volt-ini:hover{
+    opacity: initial;
+    
+}
+
+.secao {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.6s ease;
+}
+
+.secao.aparecer {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Classes Gerais */
+.linha{
+    content: "";
+    width: 90%;   
+    height: 1px;
+    background: #111;
+    display: block;
+    margin:10px 10px;   
+}
+
+.container
+{
+    width: 98%;
+    max-width: 1200px;
+    height: auto;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.fixed-scroll
+{
+    background: #fff;
+    box-shadow: 0 0 10px #ccc;
+}
+
+.fixed-scroll .hamburger_menu .traco,
+.fixed-scroll .hamburger_menu .traco::after,
+.fixed-scroll .hamburger_menu .traco::before
+{
+    content: "";
+    background: #333;
+}
+
+
+.fixed-scroll .linkmenu:hover
+{   
+    
+    color: #DC2626;
+    transition: 0.3s;
+}
+
+.fixed-scroll  #pesquisar i
+{
+    color: #333;
+}
+/* Cabeçalho */
+#topo{
+    position: fixed;
+}
+#logo
+{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    margin-top: 10px;
+
+}
+#logo img
+{
+  width: 85px;
+  
+}
+
+#logo a
+{
+    display: flex;
+    text-align: initial;
+
+}
+
+#pesquisar
+{
+     color: #fff;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#pesquisar i
+{
+    margin-right: 2px;
+}
+
+#pesquisar-fluid {
+   justify-content: center;
+   position: fixed;
+   gap: 5px ;
+}
+
+.navbar{
+    padding: 0;
+}
+
+#btn-seahc1{
+    background: none;
+}
+
+.btn-outline-success{
+    background: none;
+}
+
+.offcanvas-header h5{
+    position: fixed;
+}
+
+.btn-outline-success{
+    border-color: #000;
+    color: #000 !important;
+}
+
+
+.form-control {
+    border: none;
+    border-bottom: 2px solid #ccc;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.form-control:focus {
+    border-bottom: 2px solid #000; /* muda a cor ao clicar */
+    box-shadow: none;
+}
+
+.form-control{
+    width: 550px;
+}
+
+#perfil a
+{
+    color: #000;
+}
+
+
+#topo nav 
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+}
+
+#topo 
+{
+    width: 100%;
+    z-index:10;
+    background: #fff;
+}
+
+
+
+.navbar-brand{
+    margin: 0;
+    padding: 0;
+}
+
+.container-fluid img{
+    width: 90px;
+    height: 50px;
+    
+}
+
+
+
+
+#navegacao, #logo
+{
+    background: #E5E7EB;
+    position: fixed;
+    width: 90%;
+    top: 0;
+    right: 0;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;   
+    transform: translateX(100%);
+    pointer-events: none;
+    transition: all .5s;
+}
+
+#navegacao.open
+{
+    background: #0f172A;
+    transform: translateX(0);
+    pointer-events: all;
+}
+
+.linkmenu
+{
+    color: #000;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+
+/* Banner */
+#banner img{
+    margin-top: 65px;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  object-position: 70%;
+}
+
+
+/* Botao filtro/recente */
+.accordion-button {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    font-size: 13px;
+}
+
+.accordion-button #star{
+    margin-left: 50px;
+}
+
+
+.accordion-item {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.accordion-body {
+    background-color: transparent !important;
+}
+
+
+.accordion-item{
+    border: none !important;
+    border-color:initial !important ;
+    background: none;
+}
+
+#btns{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin:10px 0;
+}
+
+.btn{
+    border: none;
+   
+}
+
+.form-select{
+    width: 50%;
+    height: 40px;
+    border-color: #000;
+    font-size: 13px;
+}
+
+.btns-passar{
+    display: flex; 
+    justify-content: center;
+    align-items: center;  
+    border: 1px solid #000;
+    width: 40px;
+    height: 40px;
+}
+
+#accordionPanelsStayOpenExample{
+    border: none !important;
+}
+
+.accordion-button:focus{
+    box-shadow: none;
+}
+
+
+
+.accordion-item{
+    border: none !important;
+}
+.accordion-button:not(.collapsed){
+    background: #fff;
+    
+}
+
+/* Produtos */
+
+
+#ofertas
+{  
+    margin-top: 40px;
+}
+
+#ofertas h2{
+    font-size: 28px;
+}
+
+#ofertas p{
+    font-size: 14px;
+}
+
+#voltar{  
+    margin-bottom: 10px;  
+    font-size: 15px;
+  
+}
+
+#text-off p::after{
+    content: "";
+    width: 100%;
+    height: 2.5px;
+    background: #111;
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 12px;
+}
+
+#btn-off{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 10px ;
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+
+.btn-filtro{
+    background: #fff;
+    border: 1.5px solid #000;
+    width: 130px;
+    height: 40px;
+    padding: 0 14px;
+    color: #111 !important;
+    line-height: 38px;
+}
+
+#btn-seahc1,
+#btn-seahc1 i{
+    color: #111 !important;
+}
+
+/* Filtro de tamanho */
+.tamanho-grid{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.tamanho-opcao{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 42px;
+    height: 42px;
+    padding: 0 10px;
+    border: 1.5px solid #d0d0d0;
+    border-radius: 8px;
+    background: #fff;
+    color: #333;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.tamanho-opcao:hover{
+    border-color: #000;
+}
+
+.tamanho-opcao input{
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.tamanho-opcao:has(input:checked){
+    background: #000;
+    border-color: #000;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+.preco-antigo{
+    text-decoration: line-through;
+    color: #999;
+    font-size: 0.85em;
+    margin-right: 6px;
+}
+
+.preco-atual{
+    color: #DC2626;
+    font-weight: 600;
+}
+
+
+.btn-filtro i,a,
+#btn-recente i,a
+{
+    margin-top: 10px;
+    margin-left: 1px;
+}
+
+a{  
+    color: #000;
+    margin: 0;
+}
+
+#volt-ini {
+    opacity: 60%;
+    height: 20px;
+}
+
+#volt-ini:hover{
+    opacity: initial;
+}
+
+#btn-recente{
+    background: #fff;
+    border: 1.5px solid #000;
+    width: 130px;
+    height: 40px;
+}
+
+.servico-ofertas:hover {
+ border: 2px solid #000;
+ box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  transform: translateY(-5px);
+}
+.servico-ofertas p
+{
+    margin-bottom: 20px;
+    margin-top: 12px;
+    margin-left: 5px;
+}
+#btn-passar{
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+#btn-passar p{
+    font-size: 20px;
+}
+.btns-passar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    width: 40px;
+    height: 40px;
+}
+
+.btns-passar-1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    width: 40px;
+    height: 40px;
+}
+
+.btns-passar-1 a{
+    color: #fff;
+}
+
+
+/* Lançamento */
+#lancamento{
+    margin: 30px 0;
+}
+
+#lancamento h2{
+    font-size: 28px;
+}
+
+#lancamento p{
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.servico-lancamento:hover {
+ border: 2px solid #000;
+ box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  transform: translateY(-5px);
+}
+
+#texto_lanca p::after{
+    content: "";
+    width: 100%;
+    height: 2.5px;
+    background: #111;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 12px;
+}
+
+#produto-lancamento p{
+    margin-top: 20px;
+}
+
+/* Rodapé */
+#rodape
+{
+   padding-top: 50px; 
+    text-align: center;
+    background: rgb(32, 32, 32);
+    
+    
+}
+
+#rodape h3
+{
+    color: white;
+    margin-top: 15px;
+}
+
+#rodape p{
+    color: #ccc;
+}
+
+#rede-rodape a
+{
+   font-size: 30px;
+   color: #7a60ff;
+}
+
+#redes i
+{
+     
+     width: 20px;
+     height: 20px;
+     color: #ccc;
+}
+#Contato-rodape
+{
+     color: #8a8a8a;
+     display: flex;
+     flex-direction: column;
+     margin-top: 30px;
+     margin-bottom: 30px;
+}
+
+#links-rapidos a.linkmenu{
+    color: #ccc;
+}
+
+#forma-contato{
+    color: #ccc;
+}
+
+#links-rapidos a
+{
+    font-size: 16px;
+    color: #8a8a8a;
+    
+}
+
+#duvida-rodape
+{
+    margin-top: 30px;
+}
+
+
+#todos-diretos
+{
+    width: 100%;   
+    background: rgb(44, 44, 44);
+    margin-top: 30px;   
+}
+
+
+#todos-diretos p{
+    color: #ccc;
+}
+
+#redes
+    {
+        height: 35px;    
+        font-size: 30px;     
+    }
+
+    #redes i
+    {
+        width: 30px;
+        height: 35px;
+        font-size: 22px;
+    }
+
+/* Media query */
+
+@media (min-width: 768px) 
+{
+
+    #pesquisar 
+{
+    margin-right: 2px;
+    color: #000;
+    
+}
+
+#btn-seahc1 {
+    border: none;
+    border-color: transparent;
+}
+
+    .fixed-scroll  .linkmenu
+{
+    color: #333;
+}
+    .hamburger_menu
+    {
+        display: none;        
+    }
+
+    #navegacao, #logo
+    {
+        transform: initial;
+        width: initial;
+        height: initial;
+        background: transparent;
+        flex-direction: row;
+        position: initial;
+        pointer-events: all;
+        margin: 0;
+    }
+
+    #pesquisar 
+    {
+        margin: 0;
+        
+    }
+
+    #pesquisar i
+    {
+        margin-right: 5px;
+    }
+    
+    
+    #navegacao a
+    {
+        font-size: 17px;
+    }
+
+    /* Banner */
+    #banner img{
+        object-position: 20%;
+    }
+
+    /* Produtos */
+    #volt-btn{
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+    }
+
+    #voltar{
+        margin-top: 2px;
+    }
+
+    #voltar p{
+        margin-top: 3px;
+    }
+
+    .form-select{
+        width: 137px;
+    }
+
+    #btn-passar a{
+        margin: 0 ;
+    }
+
+    .btns-passar a{
+        margin: 0;
+    }
+
+    #produto_oferta{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+         justify-content: space-between; 
+        margin-top: 10px;
+    }
+
+    .servico-ofertas{
+        width: 350px;
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    /* Lançamento */
+    #produto-lancamento{
+        display: flex;
+        flex-direction: row;    
+         justify-content: space-between; 
+        margin-top: 10px;
+    }
+
+    .servico-lancamento{
+        width: 230px;
+        display: flex;
+        flex-direction: column;
+    }
+   
+     /* Rodapé */
+    #rede-rodape img
+    {
+        width: 450px;
+    }
+                  
+    #todos-diretos
+    { 
+        display: flex;
+        justify-content: space-between;
+        padding: 0 10px;
+        height: 50px;
+    }
+
+    #todos-diretos p
+    {
+        margin-top: 10px;
+    }
+
+    #redes
+    {
+        height: 35px;    
+        font-size: 30px;
+       
+    }
+
+    #redes i
+    {
+        width: 30px;
+        height: 35px;
+        font-size: 23px;
+    }
+}
+
+
+@media (min-width: 992px) 
+{
+
+    /* Produtos */
+    .servico-ofertas{
+        width: 310px;      
+    }
+
+    /* Lancamento */
+    .servico-lancamento{
+        width: 310px;       
+    }
+    
+    /* Rodapé */
+
+   #rodape{
+        padding: 0;
+    }
+
+#rodape .container
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#rodape .container h3
+{
+    margin-bottom: 20px;
+    text-align: start;
+}
+
+#rodape-email{
+    display: flex;
+    flex-direction: row;
+    height: 65px;   
+    width: 780px;
+    position: absolute;   
+   margin-left: 210px;
+   margin-top: 60px;
+    border: solid #ccc;
+    border-radius: 10px;
+}
+
+#rodape-email p{
+    font-size: 14px;
+    margin-right: 10px;
+    color: #fff;
+    margin-top: 16px;
+   margin-left: 10px;
+}
+
+#form input{
+    height: 40px;
+    border-radius: 10px;
+    background: #000; 
+    margin-top: 8px;
+    margin-right: 10px;     
+    color: #fff; 
+}
+
+#btn-email{
+    background: #fff;
+    color: #000;
+    width: 90px !important;
+    height: 30px !important;
+   margin-top: 12px;     
+   border-radius: 5px;
+   padding-top: 5px;
+   display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+#duvida-rodape p{
+    margin: 0;
+}
+#rede-rodape 
+{
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    width: 180px;   
+}
+
+
+#rede-rodape img
+    {
+        width: 150px;
+    }
+
+#links-rapidos 
+{
+    text-align: start;
+    align-content: end;
+}
+
+    #Contato-rodape
+    {     
+    margin: 0;
+    padding: 0;
+    text-align: start;
+    justify-content: end;
+    margin-bottom: 22px;
+    }
+
+    #duvida-rodape
+    {
+       margin: 0;
+       text-align: start;
+       align-content: end;
+    }
+
+    #todos-diretos 
+    {
+        height: 50px;
+    }
+
+     #redes
+    {
+        height: 35px;
+        display: flex;
+        gap: 20px ;
+        font-size: 30px;
+        margin-top: 10px;
+    }
+
+    #redes i
+    {
+        width: 30px;
+        height: 35px;
+        font-size: 25px;
+    }
+
+}
+
+
+/* Paginação das páginas de produtos. */
+.pagination {
+    gap: .4rem;
+    margin: 2rem 0;
+}
+
+.pagination .page-link {
+    min-width: 40px;
+    border: 1px solid #d4d4d4;
+    border-radius: 8px !important;
+    color: #1a1a1a;
+    font-weight: 600;
+    text-align: center;
+}
+
+.pagination .page-link:hover {
+    border-color: #b21f2d;
+    background: #b21f2d;
+    color: #fff;
+}
+
+@media (min-width: 1200px) 
+{
+
+    /* Banner */
+    #banner img{
+        height: 300px;
+    }
+    /* Produtos */
+    .servico-ofertas{
+        width: 380px;      
+    }
+
+     /* Lancamento */
+    .servico-lancamento{
+        width: 380px;       
+    }
+
+    /* Rodape */
+    #rede-rodape a
+    {
+        font-size: 35px;
+    }
+    #rodape-email{
+        margin-left: 300px;
+    }
+    #todos-diretos
+    {
+        justify-content: space-around;
+    }
+    #todos-diretos p
+    {
+       margin-top: 10px;
+       font-size: 18px;
+    }   
+
+    #forma-contato{
+        margin-bottom: 0;
+    }
+
+    #redes
+    {
+        height: 35px;
+        display: flex;
+        gap: 20px;
+        font-size: 30px;
+        margin-top: 10px;
+    }
+
+    #redes i
+    {
+        width: 30px;
+        font-size: 25px;
+    }
+}
